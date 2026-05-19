@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Orçamentos));
             label2 = new Label();
             dgvListadeServicos = new DataGridView();
@@ -59,8 +59,19 @@
             label8 = new Label();
             txtValor = new TextBox();
             lblValor = new Label();
-            btnAdicionar = new Button();
+            btnAdicionarOrçamento = new Button();
             cbClientes = new ComboBox();
+            btnAlterarOrçamento = new Button();
+            btnExcluirOrçamento = new Button();
+            pnlAlterarOrçamento = new Panel();
+            lblServiço = new Label();
+            lblCliente = new Label();
+            btnCancelarAlteracao = new Button();
+            btnSalvarAlteracao = new Button();
+            txtAlterarCelular = new TextBox();
+            txtAlterarNome = new TextBox();
+            label3 = new Label();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvListadeServicos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)obOrcamento).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbAgenda).BeginInit();
@@ -71,6 +82,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbOrcamento).BeginInit();
+            pnlAlterarOrçamento.SuspendLayout();
             SuspendLayout();
             // 
             // label2
@@ -99,33 +111,33 @@
             // 
             // Data
             // 
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(45, 45, 45);
-            dataGridViewCellStyle1.SelectionForeColor = Color.Orange;
-            Data.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(45, 45, 45);
+            dataGridViewCellStyle5.SelectionForeColor = Color.Orange;
+            Data.DefaultCellStyle = dataGridViewCellStyle5;
             Data.HeaderText = "Data";
             Data.Name = "Data";
             // 
             // Servico
             // 
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(45, 45, 45);
-            dataGridViewCellStyle2.SelectionForeColor = Color.Orange;
-            Servico.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(45, 45, 45);
+            dataGridViewCellStyle6.SelectionForeColor = Color.Orange;
+            Servico.DefaultCellStyle = dataGridViewCellStyle6;
             Servico.HeaderText = "Servico";
             Servico.Name = "Servico";
             // 
             // Valor
             // 
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(45, 45, 45);
-            dataGridViewCellStyle3.SelectionForeColor = Color.Orange;
-            Valor.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.SelectionBackColor = Color.FromArgb(45, 45, 45);
+            dataGridViewCellStyle7.SelectionForeColor = Color.Orange;
+            Valor.DefaultCellStyle = dataGridViewCellStyle7;
             Valor.HeaderText = "Valor";
             Valor.Name = "Valor";
             // 
             // Status
             // 
-            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(45, 45, 45);
-            dataGridViewCellStyle4.SelectionForeColor = Color.Orange;
-            Status.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.SelectionBackColor = Color.FromArgb(45, 45, 45);
+            dataGridViewCellStyle8.SelectionForeColor = Color.Orange;
+            Status.DefaultCellStyle = dataGridViewCellStyle8;
             Status.HeaderText = "Status";
             Status.Name = "Status";
             // 
@@ -360,17 +372,17 @@
             lblValor.TabIndex = 114;
             lblValor.Text = "Valor";
             // 
-            // btnAdicionar
+            // btnAdicionarOrçamento
             // 
-            btnAdicionar.BackColor = Color.DarkOrange;
-            btnAdicionar.FlatStyle = FlatStyle.Flat;
-            btnAdicionar.ForeColor = Color.Black;
-            btnAdicionar.Location = new Point(702, 171);
-            btnAdicionar.Name = "btnAdicionar";
-            btnAdicionar.Size = new Size(122, 23);
-            btnAdicionar.TabIndex = 116;
-            btnAdicionar.Text = "Adicionar";
-            btnAdicionar.UseVisualStyleBackColor = false;
+            btnAdicionarOrçamento.BackColor = Color.DarkOrange;
+            btnAdicionarOrçamento.FlatStyle = FlatStyle.Flat;
+            btnAdicionarOrçamento.ForeColor = Color.Black;
+            btnAdicionarOrçamento.Location = new Point(794, 140);
+            btnAdicionarOrçamento.Name = "btnAdicionarOrçamento";
+            btnAdicionarOrçamento.Size = new Size(122, 23);
+            btnAdicionarOrçamento.TabIndex = 116;
+            btnAdicionarOrçamento.Text = "Adicionar Orçamento";
+            btnAdicionarOrçamento.UseVisualStyleBackColor = false;
             // 
             // cbClientes
             // 
@@ -380,14 +392,137 @@
             cbClientes.Size = new Size(169, 23);
             cbClientes.TabIndex = 117;
             // 
+            // btnAlterarOrçamento
+            // 
+            btnAlterarOrçamento.BackColor = Color.DarkOrange;
+            btnAlterarOrçamento.Cursor = Cursors.Hand;
+            btnAlterarOrçamento.FlatStyle = FlatStyle.Flat;
+            btnAlterarOrçamento.ForeColor = Color.Black;
+            btnAlterarOrçamento.Location = new Point(792, 182);
+            btnAlterarOrçamento.Name = "btnAlterarOrçamento";
+            btnAlterarOrçamento.Size = new Size(124, 23);
+            btnAlterarOrçamento.TabIndex = 120;
+            btnAlterarOrçamento.Text = "Alterar Orçamento";
+            btnAlterarOrçamento.UseVisualStyleBackColor = false;
+            btnAlterarOrçamento.Click += btnAlterarOrçamento_Click;
+            // 
+            // btnExcluirOrçamento
+            // 
+            btnExcluirOrçamento.BackColor = Color.DarkOrange;
+            btnExcluirOrçamento.Cursor = Cursors.Hand;
+            btnExcluirOrçamento.FlatStyle = FlatStyle.Flat;
+            btnExcluirOrçamento.ForeColor = Color.Black;
+            btnExcluirOrçamento.Location = new Point(792, 223);
+            btnExcluirOrçamento.Name = "btnExcluirOrçamento";
+            btnExcluirOrçamento.Size = new Size(124, 23);
+            btnExcluirOrçamento.TabIndex = 119;
+            btnExcluirOrçamento.Text = "Excluir Orçamento";
+            btnExcluirOrçamento.UseVisualStyleBackColor = false;
+            btnExcluirOrçamento.Click += btnExcluirOrçamento_Click;
+            // 
+            // pnlAlterarOrçamento
+            // 
+            pnlAlterarOrçamento.Controls.Add(label3);
+            pnlAlterarOrçamento.Controls.Add(label4);
+            pnlAlterarOrçamento.Controls.Add(lblServiço);
+            pnlAlterarOrçamento.Controls.Add(lblCliente);
+            pnlAlterarOrçamento.Controls.Add(btnCancelarAlteracao);
+            pnlAlterarOrçamento.Controls.Add(btnSalvarAlteracao);
+            pnlAlterarOrçamento.Controls.Add(txtAlterarCelular);
+            pnlAlterarOrçamento.Controls.Add(txtAlterarNome);
+            pnlAlterarOrçamento.Location = new Point(1018, 253);
+            pnlAlterarOrçamento.Name = "pnlAlterarOrçamento";
+            pnlAlterarOrçamento.Size = new Size(366, 278);
+            pnlAlterarOrçamento.TabIndex = 121;
+            pnlAlterarOrçamento.Visible = false;
+            // 
+            // lblServiço
+            // 
+            lblServiço.AutoSize = true;
+            lblServiço.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblServiço.ForeColor = Color.White;
+            lblServiço.Location = new Point(215, 25);
+            lblServiço.Name = "lblServiço";
+            lblServiço.Size = new Size(52, 15);
+            lblServiço.TabIndex = 8;
+            lblServiço.Text = "Serviço:";
+            // 
+            // lblCliente
+            // 
+            lblCliente.AutoSize = true;
+            lblCliente.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCliente.ForeColor = Color.White;
+            lblCliente.Location = new Point(35, 25);
+            lblCliente.Name = "lblCliente";
+            lblCliente.Size = new Size(38, 15);
+            lblCliente.TabIndex = 7;
+            lblCliente.Text = "Valor:";
+            // 
+            // btnCancelarAlteracao
+            // 
+            btnCancelarAlteracao.ForeColor = Color.Black;
+            btnCancelarAlteracao.Location = new Point(243, 227);
+            btnCancelarAlteracao.Name = "btnCancelarAlteracao";
+            btnCancelarAlteracao.Size = new Size(94, 23);
+            btnCancelarAlteracao.TabIndex = 6;
+            btnCancelarAlteracao.Text = "Cancelar";
+            btnCancelarAlteracao.UseVisualStyleBackColor = true;
+            // 
+            // btnSalvarAlteracao
+            // 
+            btnSalvarAlteracao.ForeColor = Color.Black;
+            btnSalvarAlteracao.Location = new Point(40, 227);
+            btnSalvarAlteracao.Name = "btnSalvarAlteracao";
+            btnSalvarAlteracao.Size = new Size(94, 23);
+            btnSalvarAlteracao.TabIndex = 5;
+            btnSalvarAlteracao.Text = "Salvar";
+            btnSalvarAlteracao.UseVisualStyleBackColor = true;
+            // 
+            // txtAlterarCelular
+            // 
+            txtAlterarCelular.Location = new Point(215, 59);
+            txtAlterarCelular.Name = "txtAlterarCelular";
+            txtAlterarCelular.Size = new Size(123, 23);
+            txtAlterarCelular.TabIndex = 1;
+            // 
+            // txtAlterarNome
+            // 
+            txtAlterarNome.Location = new Point(35, 59);
+            txtAlterarNome.Name = "txtAlterarNome";
+            txtAlterarNome.Size = new Size(146, 23);
+            txtAlterarNome.TabIndex = 0;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(247, 132);
+            label3.Name = "label3";
+            label3.Size = new Size(52, 15);
+            label3.TabIndex = 10;
+            label3.Text = "Serviço:";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(67, 132);
+            label4.Name = "label4";
+            label4.Size = new Size(49, 15);
+            label4.TabIndex = 9;
+            label4.Text = "Cliente:";
+            // 
             // Orçamentos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(1419, 624);
+            Controls.Add(pnlAlterarOrçamento);
+            Controls.Add(btnAlterarOrçamento);
+            Controls.Add(btnExcluirOrçamento);
             Controls.Add(cbClientes);
-            Controls.Add(btnAdicionar);
+            Controls.Add(btnAdicionarOrçamento);
             Controls.Add(txtValor);
             Controls.Add(lblValor);
             Controls.Add(label8);
@@ -412,6 +547,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbOrcamento).EndInit();
+            pnlAlterarOrçamento.ResumeLayout(false);
+            pnlAlterarOrçamento.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -464,11 +601,22 @@
         private Label label8;
         private TextBox txtValor;
         private Label lblValor;
-        private Button btnAdicionar;
+        private Button btnAdicionarOrçamento;
         private ComboBox cbClientes;
         private DataGridViewTextBoxColumn Data;
         private DataGridViewTextBoxColumn Servico;
         private DataGridViewTextBoxColumn Valor;
         private DataGridViewTextBoxColumn Status;
+        private Button btnAlterarOrçamento;
+        private Button btnExcluirOrçamento;
+        private Panel pnlAlterarOrçamento;
+        private Label lblServiço;
+        private Label lblCliente;
+        private Button btnCancelarAlteracao;
+        private Button btnSalvarAlteracao;
+        private TextBox txtAlterarCelular;
+        private TextBox txtAlterarNome;
+        private Label label3;
+        private Label label4;
     }
 }

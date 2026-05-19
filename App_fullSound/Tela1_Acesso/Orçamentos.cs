@@ -47,8 +47,8 @@ namespace Tela1_Acesso
             this.WindowState = FormWindowState.Maximized;
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
 
-            btnAdicionar.Click -= btnAdicionar_Click;
-            btnAdicionar.Click += btnAdicionar_Click;
+            btnAdicionarOrçamento.Click -= btnAdicionar_Click;
+            btnAdicionarOrçamento.Click += btnAdicionar_Click;
 
             btnEmitirComprovante.Click -= btnEmitirComprovante_Click;
             btnEmitirComprovante.Click += btnEmitirComprovante_Click;
@@ -668,10 +668,100 @@ namespace Tela1_Acesso
             home.Show();
             this.Hide();
         }
-
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+        private void btnAlterarOrçamento_Click(object sender, EventArgs e)
+        {
+            if (_idServico <= 0)
+                PegarIdServicoDaLinhaAtual();
+
+            if (_idServico <= 0)
+            {
+                MessageBox.Show("Selecione um orçamento na lista.");
+                return;
+            }
+
+            if (txtValor.Text.Trim() == "")
+            {
+                MessageBox.Show("Digite o novo valor do orçamento.");
+                return;
+            }
+            string valorDigitado = txtValor.Text.Replace("R$", "").Trim();
+            if (!decimal.TryParse(
+                valorDigitado,
+                NumberStyles.Any,
+                new CultureInfo("pt-BR"),
+                out decimal valor))
+            {
+                MessageBox.Show("Digite um valor válido.");
+                return;
+            }
+            using (MySqlConnection conn = new MySqlConnection(conexao))
+            {
+                try
+                {
+                    conn.Open();
+
+                    string sql = @"
+                UPDATE agenda
+                SET valor = @valor
+                WHERE id_servico = @idServico";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@valor", valor);
+                    cmd.Parameters.AddWithValue("@idServico", _idServico);
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Orçamento alterado com sucesso!");
+                    txtValor.Clear();
+                    int idServicoAtual = _idServico;
+                    CarregarDadosAgendaComDestaque(idServicoAtual);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro ao alterar orçamento: " + ex.Message);
+                }
+            }
+        }
+        private void btnExcluirOrçamento_Click(object sender, EventArgs e)
+        {
+            if (_idServico <= 0)
+                PegarIdServicoDaLinhaAtual();
+            if (_idServico <= 0)
+            {
+                MessageBox.Show("Selecione um orçamento na lista.");
+                return;
+            }
+            DialogResult resposta = MessageBox.Show(
+                "Deseja realmente excluir o valor deste orçamento?",
+                "Confirmar exclusão",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+            if (resposta != DialogResult.Yes)
+                return;
+            using (MySqlConnection conn = new MySqlConnection(conexao))
+            {
+                try
+                {
+                    conn.Open();
+                    string sql = @"
+                UPDATE agenda
+                SET valor = 0
+                WHERE id_servico = @idServico";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@idServico", _idServico);
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Orçamento excluído com sucesso!");
+                    txtValor.Clear();
+                    int idServicoAtual = _idServico;
+                    CarregarDadosAgendaComDestaque(idServicoAtual);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro ao excluir orçamento: " + ex.Message);
+                }
+            }
         }
     }
 }

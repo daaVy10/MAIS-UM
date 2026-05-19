@@ -48,6 +48,15 @@ namespace FullSoundApp
             cbClientes = new ComboBox();
             label1 = new Label();
             dgvAgendamentos = new DataGridView();
+            btnAlterarServiço = new Button();
+            btnExcluirServiço = new Button();
+            pnlAlterarServiço = new Panel();
+            lblServiço = new Label();
+            lblCliente = new Label();
+            btnCancelarAlteracao = new Button();
+            btnSalvarAlteracao = new Button();
+            txtAlterarCelular = new TextBox();
+            txtAlterarNome = new TextBox();
             panelFiltro.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbAgenda).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbHome).BeginInit();
@@ -58,6 +67,7 @@ namespace FullSoundApp
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvAgendamentos).BeginInit();
+            pnlAlterarServiço.SuspendLayout();
             SuspendLayout();
             // 
             // lblData
@@ -65,7 +75,7 @@ namespace FullSoundApp
             lblData.AutoSize = true;
             lblData.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblData.ForeColor = Color.White;
-            lblData.Location = new Point(418, 138);
+            lblData.Location = new Point(420, 102);
             lblData.Name = "lblData";
             lblData.Size = new Size(33, 15);
             lblData.TabIndex = 5;
@@ -76,7 +86,7 @@ namespace FullSoundApp
             lblHora.AutoSize = true;
             lblHora.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblHora.ForeColor = Color.White;
-            lblHora.Location = new Point(417, 240);
+            lblHora.Location = new Point(419, 204);
             lblHora.Name = "lblHora";
             lblHora.Size = new Size(34, 15);
             lblHora.TabIndex = 7;
@@ -87,10 +97,11 @@ namespace FullSoundApp
             dtpData.CalendarForeColor = Color.Black;
             dtpData.CalendarMonthBackground = Color.White;
             dtpData.Font = new Font("Segoe UI", 9F);
-            dtpData.Location = new Point(420, 156);
+            dtpData.Location = new Point(422, 120);
             dtpData.Name = "dtpData";
             dtpData.Size = new Size(326, 23);
             dtpData.TabIndex = 6;
+            dtpData.ValueChanged += dtpData_ValueChanged;
             // 
             // mtxHora
             // 
@@ -99,7 +110,7 @@ namespace FullSoundApp
             mtxHora.BorderStyle = BorderStyle.FixedSingle;
             mtxHora.Font = new Font("Segoe UI", 9F);
             mtxHora.ForeColor = Color.Black;
-            mtxHora.Location = new Point(420, 258);
+            mtxHora.Location = new Point(422, 222);
             mtxHora.Mask = "00:00";
             mtxHora.Name = "mtxHora";
             mtxHora.Size = new Size(67, 23);
@@ -112,7 +123,7 @@ namespace FullSoundApp
             panelFiltro.BorderStyle = BorderStyle.FixedSingle;
             panelFiltro.Controls.Add(lblTipoServico);
             panelFiltro.Controls.Add(comboTipoServico);
-            panelFiltro.Location = new Point(773, 148);
+            panelFiltro.Location = new Point(775, 112);
             panelFiltro.Name = "panelFiltro";
             panelFiltro.Padding = new Padding(16);
             panelFiltro.Size = new Size(424, 106);
@@ -308,9 +319,9 @@ namespace FullSoundApp
             lbClientes2.ForeColor = Color.White;
             lbClientes2.Location = new Point(492, 46);
             lbClientes2.Name = "lbClientes2";
-            lbClientes2.Size = new Size(254, 30);
+            lbClientes2.Size = new Size(256, 30);
             lbClientes2.TabIndex = 108;
-            lbClientes2.Text = "Agendamento de serviço";
+            lbClientes2.Text = "Agendamento de Serviço";
             // 
             // pictureBox2
             // 
@@ -328,7 +339,7 @@ namespace FullSoundApp
             btnServiço.BackColor = Color.DarkOrange;
             btnServiço.FlatStyle = FlatStyle.Flat;
             btnServiço.ForeColor = Color.Black;
-            btnServiço.Location = new Point(624, 207);
+            btnServiço.Location = new Point(626, 171);
             btnServiço.Name = "btnServiço";
             btnServiço.Size = new Size(122, 23);
             btnServiço.TabIndex = 110;
@@ -339,7 +350,7 @@ namespace FullSoundApp
             // cbClientes
             // 
             cbClientes.FormattingEnabled = true;
-            cbClientes.Location = new Point(420, 207);
+            cbClientes.Location = new Point(422, 171);
             cbClientes.Name = "cbClientes";
             cbClientes.Size = new Size(121, 23);
             cbClientes.TabIndex = 14;
@@ -350,7 +361,7 @@ namespace FullSoundApp
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(418, 191);
+            label1.Location = new Point(420, 155);
             label1.Name = "label1";
             label1.Size = new Size(46, 15);
             label1.TabIndex = 111;
@@ -388,11 +399,111 @@ namespace FullSoundApp
             dgvAgendamentos.Size = new Size(777, 289);
             dgvAgendamentos.TabIndex = 13;
             // 
+            // btnAlterarServiço
+            // 
+            btnAlterarServiço.BackColor = Color.DarkOrange;
+            btnAlterarServiço.Cursor = Cursors.Hand;
+            btnAlterarServiço.FlatStyle = FlatStyle.Flat;
+            btnAlterarServiço.ForeColor = Color.Black;
+            btnAlterarServiço.Location = new Point(624, 203);
+            btnAlterarServiço.Name = "btnAlterarServiço";
+            btnAlterarServiço.Size = new Size(124, 23);
+            btnAlterarServiço.TabIndex = 113;
+            btnAlterarServiço.Text = "Alterar Serviço";
+            btnAlterarServiço.UseVisualStyleBackColor = false;
+            btnAlterarServiço.Click += btnAlterarServiço_Click;
+            // 
+            // btnExcluirServiço
+            // 
+            btnExcluirServiço.BackColor = Color.DarkOrange;
+            btnExcluirServiço.Cursor = Cursors.Hand;
+            btnExcluirServiço.FlatStyle = FlatStyle.Flat;
+            btnExcluirServiço.ForeColor = Color.Black;
+            btnExcluirServiço.Location = new Point(624, 236);
+            btnExcluirServiço.Name = "btnExcluirServiço";
+            btnExcluirServiço.Size = new Size(124, 23);
+            btnExcluirServiço.TabIndex = 112;
+            btnExcluirServiço.Text = "Excluir Serviço";
+            btnExcluirServiço.UseVisualStyleBackColor = false;
+            btnExcluirServiço.Click += btnExcluirServiço_Click;
+            // 
+            // pnlAlterarServiço
+            // 
+            pnlAlterarServiço.Controls.Add(lblServiço);
+            pnlAlterarServiço.Controls.Add(lblCliente);
+            pnlAlterarServiço.Controls.Add(btnCancelarAlteracao);
+            pnlAlterarServiço.Controls.Add(btnSalvarAlteracao);
+            pnlAlterarServiço.Controls.Add(txtAlterarCelular);
+            pnlAlterarServiço.Controls.Add(txtAlterarNome);
+            pnlAlterarServiço.Location = new Point(1021, 253);
+            pnlAlterarServiço.Name = "pnlAlterarServiço";
+            pnlAlterarServiço.Size = new Size(366, 278);
+            pnlAlterarServiço.TabIndex = 114;
+            pnlAlterarServiço.Visible = false;
+            // 
+            // lblServiço
+            // 
+            lblServiço.AutoSize = true;
+            lblServiço.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblServiço.Location = new Point(215, 25);
+            lblServiço.Name = "lblServiço";
+            lblServiço.Size = new Size(52, 15);
+            lblServiço.TabIndex = 8;
+            lblServiço.Text = "Serviço:";
+            // 
+            // lblCliente
+            // 
+            lblCliente.AutoSize = true;
+            lblCliente.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCliente.Location = new Point(35, 25);
+            lblCliente.Name = "lblCliente";
+            lblCliente.Size = new Size(49, 15);
+            lblCliente.TabIndex = 7;
+            lblCliente.Text = "Cliente:";
+            // 
+            // btnCancelarAlteracao
+            // 
+            btnCancelarAlteracao.ForeColor = Color.Black;
+            btnCancelarAlteracao.Location = new Point(243, 227);
+            btnCancelarAlteracao.Name = "btnCancelarAlteracao";
+            btnCancelarAlteracao.Size = new Size(94, 23);
+            btnCancelarAlteracao.TabIndex = 6;
+            btnCancelarAlteracao.Text = "Cancelar";
+            btnCancelarAlteracao.UseVisualStyleBackColor = true;
+            // 
+            // btnSalvarAlteracao
+            // 
+            btnSalvarAlteracao.ForeColor = Color.Black;
+            btnSalvarAlteracao.Location = new Point(40, 227);
+            btnSalvarAlteracao.Name = "btnSalvarAlteracao";
+            btnSalvarAlteracao.Size = new Size(94, 23);
+            btnSalvarAlteracao.TabIndex = 5;
+            btnSalvarAlteracao.Text = "Salvar";
+            btnSalvarAlteracao.UseVisualStyleBackColor = true;
+            // 
+            // txtAlterarCelular
+            // 
+            txtAlterarCelular.Location = new Point(215, 59);
+            txtAlterarCelular.Name = "txtAlterarCelular";
+            txtAlterarCelular.Size = new Size(123, 23);
+            txtAlterarCelular.TabIndex = 1;
+            txtAlterarCelular.TextChanged += txtAlterarCelular_TextChanged;
+            // 
+            // txtAlterarNome
+            // 
+            txtAlterarNome.Location = new Point(35, 59);
+            txtAlterarNome.Name = "txtAlterarNome";
+            txtAlterarNome.Size = new Size(146, 23);
+            txtAlterarNome.TabIndex = 0;
+            // 
             // Agenda
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.Black;
             ClientSize = new Size(1419, 624);
+            Controls.Add(pnlAlterarServiço);
+            Controls.Add(btnAlterarServiço);
+            Controls.Add(btnExcluirServiço);
             Controls.Add(dgvAgendamentos);
             Controls.Add(label1);
             Controls.Add(btnServiço);
@@ -424,6 +535,8 @@ namespace FullSoundApp
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvAgendamentos).EndInit();
+            pnlAlterarServiço.ResumeLayout(false);
+            pnlAlterarServiço.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
 
@@ -457,5 +570,14 @@ namespace FullSoundApp
         private ComboBox cbClientes;
         private Label label1;
         private DataGridView dgvAgendamentos;
+        private Button btnAlterarServiço;
+        private Button btnExcluirServiço;
+        private Panel pnlAlterarServiço;
+        private Label lblServiço;
+        private Label lblCliente;
+        private Button btnCancelarAlteracao;
+        private Button btnSalvarAlteracao;
+        private TextBox txtAlterarCelular;
+        private TextBox txtAlterarNome;
     }
 }

@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Tela1_Acesso
@@ -35,6 +36,18 @@ namespace Tela1_Acesso
 
             dgvClientes.CellClick -= dgvClientes_CellClick;
             dgvClientes.CellClick += dgvClientes_CellClick;
+
+            txtNome.KeyPress -= txtNome_KeyPress;
+            txtNome.KeyPress += txtNome_KeyPress;
+
+            txtCelular.KeyPress -= txtCelular_KeyPress;
+            txtCelular.KeyPress += txtCelular_KeyPress;
+
+            txtAlterarNome.KeyPress -= txtNome_KeyPress;
+            txtAlterarNome.KeyPress += txtNome_KeyPress;
+
+            txtAlterarCelular.KeyPress -= txtCelular_KeyPress;
+            txtAlterarCelular.KeyPress += txtCelular_KeyPress;
         }
 
         private void TelaCliente_Load(object sender, EventArgs e)
@@ -120,6 +133,17 @@ namespace Tela1_Acesso
         private void btnAdicionarCliente_Click_1(object sender, EventArgs e)
         {
             AdicionarCliente();
+            if (txtNome.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("O nome não pode conter números.");
+                return;
+            }
+
+            if (!txtCelular.Text.All(char.IsDigit))
+            {
+                MessageBox.Show("O celular deve conter apenas números.");
+                return;
+            }
         }
 
         private void AdicionarCliente()
@@ -133,6 +157,18 @@ namespace Tela1_Acesso
             if (txtCelular.Text.Trim() == "")
             {
                 MessageBox.Show("Digite o celular do cliente.");
+                return;
+            }
+
+            if (txtNome.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("O nome do cliente não pode conter números.");
+                return;
+            }
+
+            if (txtCelular.Text.Any(char.IsLetter))
+            {
+                MessageBox.Show("O celular não pode conter letras.");
                 return;
             }
 
@@ -189,6 +225,7 @@ namespace Tela1_Acesso
                 }
             }
         }
+
         private void dgvClientes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)
@@ -397,6 +434,18 @@ namespace Tela1_Acesso
                 return;
             }
 
+            if (txtAlterarNome.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("O nome do cliente não pode conter números.");
+                return;
+            }
+
+            if (txtAlterarCelular.Text.Any(char.IsLetter))
+            {
+                MessageBox.Show("O celular não pode conter letras.");
+                return;
+            }
+
             string tipoVeiculo = "";
 
             if (rbAlterarHatch.Checked)
@@ -505,6 +554,32 @@ namespace Tela1_Acesso
         private void btnRemoverCliente_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void pnlAlterarCliente_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void txtAlterarNome_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNome_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtCelular_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

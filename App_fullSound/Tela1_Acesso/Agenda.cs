@@ -28,6 +28,7 @@ namespace FullSoundApp
             mtxHora.Mask = "00:00";
             ConfigurarDgv();
             CarregarClientes();
+            dtpData.MinDate = DateTime.Today;
         }
         private void Agenda_Load(object sender, EventArgs e)
         {
@@ -257,7 +258,6 @@ namespace FullSoundApp
                             @hora,
                             @tipo_servico
                         )";
-
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@id_cliente", idCliente);
                     cmd.Parameters.AddWithValue("@data", dtpData.Value.Date);
@@ -369,6 +369,113 @@ namespace FullSoundApp
 
         }
         private void btnEmitirComprovante_Click_1(object sender, EventArgs e)
+        {
+
+        }
+        private void txtAlterarCelular_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void btnAlterarServiço_Click(object sender, EventArgs e)
+        {
+            if (!SelecionarAgendamentoAtual())
+            {
+                MessageBox.Show("Selecione um serviço na tabela.");
+                return;
+            }
+            if (cbClientes.SelectedValue == null || cbClientes.SelectedValue is DataRowView)
+            {
+                MessageBox.Show("Selecione um cliente.");
+                return;
+            }
+            int idCliente = Convert.ToInt32(cbClientes.SelectedValue);
+            if (idCliente == 0)
+            {
+                MessageBox.Show("Selecione um cliente válido.");
+                return;
+            }
+            if (comboTipoServico.SelectedIndex == -1)
+            {
+                MessageBox.Show("Selecione o novo tipo de serviço.");
+                return;
+            }
+            if (!mtxHora.MaskCompleted)
+            {
+                MessageBox.Show("Informe a nova hora.");
+                return;
+            }
+            using (MySqlConnection conn = new MySqlConnection(conexao))
+            {
+                try
+                {
+                    conn.Open();
+                    string sql = @"
+                UPDATE agenda
+                SET
+                    id_cliente = @id_cliente,
+                    data_agendamento = @data,
+                    hora_agendamento = @hora,
+                    tipo_servico = @tipo_servico
+                WHERE id_servico = @id_servico";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@id_cliente", idCliente);
+                    cmd.Parameters.AddWithValue("@data", dtpData.Value.Date);
+                    cmd.Parameters.AddWithValue("@hora", mtxHora.Text);
+                    cmd.Parameters.AddWithValue("@tipo_servico", comboTipoServico.SelectedItem.ToString());
+                    cmd.Parameters.AddWithValue("@id_servico", idServico);
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Serviço alterado com sucesso!");
+                    comboTipoServico.SelectedIndex = -1;
+                    mtxHora.Clear();
+                    Carregar();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro ao alterar serviço: " + ex.Message);
+                }
+            }
+        }
+        private void btnExcluirServiço_Click(object sender, EventArgs e)
+        {
+            if (!SelecionarAgendamentoAtual())
+            {
+                MessageBox.Show("Selecione um serviço na tabela.");
+                return;
+            }
+            DialogResult resposta = MessageBox.Show(
+                "Deseja realmente excluir este serviço?",
+                "Confirmar exclusão",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+            if (resposta != DialogResult.Yes)
+                return;
+            using (MySqlConnection conn = new MySqlConnection(conexao))
+            {
+                try
+                {
+                    conn.Open();
+                    string sql = @"
+                DELETE FROM agenda
+                WHERE id_servico = @id_servico";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@id_servico", idServico);
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Serviço excluído com sucesso!");
+                    comboTipoServico.SelectedIndex = -1;
+                    mtxHora.Clear();
+                    idServico = 0;
+                    Carregar();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro ao excluir serviço: " + ex.Message);
+                }
+            }
+        }
+
+        private void dtpData_ValueChanged(object sender, EventArgs e)
         {
 
         }

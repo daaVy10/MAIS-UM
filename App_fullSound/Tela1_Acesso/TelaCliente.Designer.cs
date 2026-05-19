@@ -254,6 +254,7 @@
             pnlAlterarCliente.Size = new Size(366, 278);
             pnlAlterarCliente.TabIndex = 99;
             pnlAlterarCliente.Visible = false;
+            pnlAlterarCliente.Paint += pnlAlterarCliente_Paint;
             // 
             // lbltel
             // 
@@ -343,6 +344,7 @@
             txtAlterarNome.Name = "txtAlterarNome";
             txtAlterarNome.Size = new Size(146, 23);
             txtAlterarNome.TabIndex = 0;
+            txtAlterarNome.TextChanged += txtAlterarNome_TextChanged;
             // 
             // lbClientes2
             // 
